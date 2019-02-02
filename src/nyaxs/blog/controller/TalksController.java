@@ -21,7 +21,7 @@ public class TalksController {
 	@Autowired
 	UsersService userService;
 	
-	@RequestMapping(value = "index", method = RequestMethod.GET)
+	@RequestMapping(value = "talking", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("listTalkAll", talkService.listTalksAll());
