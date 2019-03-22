@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import nyaxs.blog.pojo.Users;
 import nyaxs.blog.service.PostsService;
+import nyaxs.blog.service.TalksService;
 import nyaxs.blog.service.UsersService;
 import nyaxs.blog.util.DateFormat;
 
@@ -18,6 +19,8 @@ public class UsersController {
 	UsersService userService;
 	@Autowired
 	PostsService postService;
+	@Autowired
+	TalksService talkService;
 	
 
 	@RequestMapping("userLogin")
@@ -27,6 +30,7 @@ public class UsersController {
 		
 		if (user1 != null) {
 			mav.addObject("listPost", postService.listPostsByUserId(user1.getId()));
+			mav.addObject("listTalk", talkService.listTalksByUserId(user1.getId()));
 			mav.addObject("user", user1);
 			mav.setViewName("home");
 			return mav;
