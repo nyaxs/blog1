@@ -30,4 +30,11 @@
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
+    
+    <!-- TEST -->
+    <bean id="LogsServiceImpl" class="nyaxs.blog.service.impl.LogsServiceImpl">
+		<property name="logMapper" ref="talksServiceImpl"/>
+	</bean>
+	<bean id="talksServiceImpl" class="nyaxs.blog.service.impl.talksServiceImpl"/>
+    <!-- TEST -->
 </beans>

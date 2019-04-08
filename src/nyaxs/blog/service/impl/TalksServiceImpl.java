@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import nyaxs.blog.mapper.LogsMapper;
 import nyaxs.blog.mapper.TalksMapper;
+import nyaxs.blog.pojo.Logs;
 import nyaxs.blog.pojo.Talks;
 import nyaxs.blog.service.TalksService;
 
@@ -14,6 +16,7 @@ public class TalksServiceImpl implements TalksService {
 	
 	@Autowired
 	TalksMapper talkMapper;
+	LogsMapper logMapper;
 
 	@Override
 	public int addTalk(Talks talk) {
@@ -43,5 +46,11 @@ public class TalksServiceImpl implements TalksService {
 	public List<Talks> listTalksAll() {
 		return talkMapper.listTalksAll();
 	}
-
+	
+	/* Test... */
+	@Override
+	public void toLog(Logs log){
+		logMapper.addLog(log);
+		return;
+	}
 }
