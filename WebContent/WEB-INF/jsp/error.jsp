@@ -3,4 +3,14 @@
   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
   
-<h1 align="center">ERROR</h1>
+
+
+<html>
+<head>
+    <title>错误提示</title>
+</head>
+<body>
+<h1 align="center">ERROR:</h1><br>
+    ${errMessage}
+</body>
+</html>

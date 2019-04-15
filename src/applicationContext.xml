@@ -44,4 +44,5 @@
         <property name="basePackage" value="nyaxs.blog.mapper"/>
     </bean>
      
+     <bean class="nyaxs.blog.util.BlogExceptionResolver"/>
 </beans>
