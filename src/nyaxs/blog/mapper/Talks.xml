@@ -5,20 +5,20 @@
  
     <mapper namespace="nyaxs.blog.mapper.TalksMapper">
         <insert id="addTalk" parameterType="Talks" >
-            insert into posts ( talk_author,talk_content,talk_date) values (#{talk_author},#{talk_content},#{talk_date})   
+            insert into talks ( talk_author,talk_content,talk_date) values (#{talk_author},#{talk_content},#{talk_date})   
         </insert>
          
         <delete id="deleteTalk" parameterType="Talks" >
-            delete from posts where id = #{id}  
+            delete from talks where id = #{id}  
         </delete>
         
         <update id="updateTalk" parameterType="Talks" >
             update talks set talk_content=#{talk_content} where id=#{id}   
         </update>
         <select id="listTalksAll" resultType="Talks">
-            select * from  Talks     
+            select * from  talks     
         </select>  
-         <select id="listTalksByUserId"  parameterType="_int" resultType="Posts">
-            select * from  talks where post_author = #{post_author}     
+         <select id="listTalksByUserId"  parameterType="_int" resultType="Talks">
+            select * from  talks where talk_author = #{talk_author}     
         </select>
     </mapper>

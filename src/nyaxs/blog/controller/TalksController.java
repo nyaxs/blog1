@@ -29,12 +29,12 @@ public class TalksController {
 	}
 	
 	public ModelAndView initHomePage() {
-		ModelAndView mav = new ModelAndView("test2");
+		ModelAndView mav = new ModelAndView("home");
 		return mav;
 	}
 	@RequestMapping("listTalksByUser")
 	public ModelAndView listTalksByUser(Users user) throws Exception {
-		ModelAndView mav = new ModelAndView("test2");
+		ModelAndView mav = new ModelAndView("home");
 		mav.addObject("user",user);
 		mav.addObject("listTalksByUser", talkService.listTalksByUserId(user.getId()));
 		return mav;

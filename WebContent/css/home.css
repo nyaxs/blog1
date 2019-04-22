@@ -81,7 +81,7 @@ li{
   text-align:center;
 }
 .editor-toolbar a:hover{
-	background-color:#2d8cf0;
+	background-color:#2886f4;
 }
 .editor-publish{
   grid-area:1/12/2/13;
@@ -149,6 +149,7 @@ li{
 .card-action a:hover{
   background-color:#f5f7f9;
   letter-spacing: 2px;
+  color:#2888f5;
 }
 .card-action-more{
   grid-area:1/12/2/13;

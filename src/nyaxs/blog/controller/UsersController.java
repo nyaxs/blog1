@@ -30,7 +30,7 @@ public class UsersController {
 		if (user1 != null) {
 			mav.addObject("listTalksByUser", talkService.listTalksByUserId(user1.getId()));
 			mav.addObject("user", user1);
-			mav.setViewName("test2");
+			mav.setViewName("home");
 			return mav;
 		}
 		mav.setViewName("error");
