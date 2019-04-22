@@ -12,7 +12,7 @@ public class Posts {
 	private String post_status;
 	private Date post_modified;
 	private String post_type;
-	private String comment_count;
+	private int comment_count;
 	public int getId() {
 		return id;
 	}
@@ -61,10 +61,10 @@ public class Posts {
 	public void setPost_type(String post_type) {
 		this.post_type = post_type;
 	}
-	public String getComment_count() {
+	public int getComment_count() {
 		return comment_count;
 	}
-	public void setComment_count(String comment_count) {
+	public void setComment_count(int comment_count) {
 		this.comment_count = comment_count;
 	}
 	

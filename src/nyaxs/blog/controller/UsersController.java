@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import nyaxs.blog.pojo.Users;
 import nyaxs.blog.service.PostsService;
+import nyaxs.blog.service.TalksService;
 import nyaxs.blog.service.UsersService;
 import nyaxs.blog.util.DateFormat;
 
@@ -18,17 +19,18 @@ public class UsersController {
 	UsersService userService;
 	@Autowired
 	PostsService postService;
-	
+	@Autowired
+	TalksService talkService;
 
 	@RequestMapping("userLogin")
-	public ModelAndView userLogin(Users user) {
+	public ModelAndView userLogin(Users user) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		Users user1 = userService.userLogin(user.getUser_login(), user.getUser_pass());
 		
 		if (user1 != null) {
-			mav.addObject("listPost", postService.listPostsByUserId(user1.getId()));
+			mav.addObject("listTalksByUser", talkService.listTalksByUserId(user1.getId()));
 			mav.addObject("user", user1);
-			mav.setViewName("home");
+			mav.setViewName("test2");
 			return mav;
 		}
 		mav.setViewName("error");
@@ -36,7 +38,7 @@ public class UsersController {
 	}
 
 	@RequestMapping("userRegister")
-	public ModelAndView userRegister(Users user) {
+	public ModelAndView userRegister(Users user) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		user.setUser_registered(DateFormat.getCurrentTime());
 		if (userService.userRegister(user) == 1) {

@@ -40,7 +40,7 @@ public class PostsController {
 	}
 
 	@RequestMapping("postIssue")
-	public ModelAndView postIssue(Posts post) {
+	public ModelAndView postIssue(Posts post) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		post.setPost_date(DateFormat.getCurrentTime());
 		if (postService.addPost(post) == 1) {
