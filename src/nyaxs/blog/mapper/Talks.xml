@@ -19,6 +19,6 @@
             select * from  talks     
         </select>  
          <select id="listTalksByUserId"  parameterType="_int" resultType="Talks">
-            select * from  talks where talk_author = #{talk_author}     
+            select * from  talks where talk_author = #{userId}     
         </select>
     </mapper>

@@ -23,6 +23,6 @@
             select * from  posts     
         </select>  
          <select id="listPostsByUserId"  parameterType="_int" resultType="Posts">
-            select * from  posts where post_author = #{post_author}     
+            select * from  posts where post_author = #{userId}     
         </select>
     </mapper>

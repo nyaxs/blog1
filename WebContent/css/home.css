@@ -136,8 +136,19 @@ li{
    font-size:14px;
   letter-spacing: 1px;
 }
+.text-box{
+	overflow:hidden;
+}
+.card-post-content{
+	max-height: 100px;
+	
+}
 .img-box{
-  max-height:108px;
+  max-height:214px;
+}
+.img-detail{
+	max-height: 100px;
+	max-width: 100px;
 }
 .card-action{
   grid-area:4/1/5/10;

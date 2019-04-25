@@ -13,6 +13,27 @@ public class Posts {
 	private Date post_modified;
 	private String post_type;
 	private int comment_count;
+	private int upvote_count;
+	private int share_count;
+	public int getUpvote_count() {
+		return upvote_count;
+	}
+	public void setUpvote_count(int upvote_count) {
+		this.upvote_count = upvote_count;
+	}
+	public int getShare_count() {
+		return share_count;
+	}
+	public void setShare_count(int share_count) {
+		this.share_count = share_count;
+	}
+	public int getCollect_count() {
+		return collect_count;
+	}
+	public void setCollect_count(int collect_count) {
+		this.collect_count = collect_count;
+	}
+	private int collect_count;
 	public int getId() {
 		return id;
 	}

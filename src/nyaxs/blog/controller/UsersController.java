@@ -1,10 +1,14 @@
 package nyaxs.blog.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nyaxs.blog.pojo.Users;
 import nyaxs.blog.service.PostsService;
@@ -12,6 +16,7 @@ import nyaxs.blog.service.TalksService;
 import nyaxs.blog.service.UsersService;
 import nyaxs.blog.util.DateFormat;
 
+//@SessionAttributes(value= {"userId"},types= {Users.class})
 @Controller
 @RequestMapping("")
 public class UsersController {
@@ -22,19 +27,34 @@ public class UsersController {
 	@Autowired
 	TalksService talkService;
 
+	static Logger logger  = Logger.getLogger(UsersController.class);
+	
+	@RequestMapping("login")
+	public ModelAndView login() throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("login");
+		return mav;
+	}
+	
 	@RequestMapping("userLogin")
-	public ModelAndView userLogin(Users user) throws Exception {
+	public String userLogin(Users user,Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		Users user1 = userService.userLogin(user.getUser_login(), user.getUser_pass());
 		
 		if (user1 != null) {
+			/*
 			mav.addObject("listTalksByUser", talkService.listTalksByUserId(user1.getId()));
 			mav.addObject("user", user1);
-			mav.setViewName("home");
-			return mav;
+			mav.setViewName("home");*/
+			logger.info("验证成功");
+			logger.info("添加传递对象，跳转home页");
+			logger.info(user1.getId());
+			model.addAttribute("userId",user1.getId());
+			mav.addObject("userId",user1.getId());
+			return "redirect:home";
 		}
 		mav.setViewName("error");
-		return mav;
+		return "error";
 	}
 
 	@RequestMapping("userRegister")

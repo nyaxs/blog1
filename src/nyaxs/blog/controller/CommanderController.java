@@ -28,7 +28,7 @@ public class CommanderController {
 		mav.setViewName("listCommander");
 		return mav;
 	}
-
+/*
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public ModelAndView login() {
 		return new ModelAndView("login", "command", new Commander());
@@ -45,5 +45,6 @@ public class CommanderController {
 		}
 		return "error";
 	}
+	*/
 
 }

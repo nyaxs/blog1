@@ -19,9 +19,9 @@
 
 <body class="all-in-container">
 	<div class="header">
-		<a href="#" class="logo">Nya☆喵克斯制药</a>
+		<a href="home" class="logo">Nya☆喵克斯制药</a>
 		<div class="header-list">
-			<a href="#">Home</a> <a href="#">Talk</a> <a href="#">Blog</a> <a
+			<a href="home">Home</a> <a href="home">Talk</a> <a href="blog?userId=${user.id}">Blog</a> <a
 				href="#">Luck</a>
 		</div>
 		<a href="login" class="user-login-info">${user.user_nicename}</a>
@@ -46,24 +46,24 @@
 
 		<div class="card-flow">
 			<br>
-			<c:forEach items="${listTalksByUser}" var="talk" varStatus="st">
+			<c:forEach items="${listTimeLine}" var="ltb" varStatus="st">
 				<div class="card">
 					<a href="" target="_blank" class="user-head"
-						style="background-image: url(''); border-radius: 50%;">a</a>
+						style="background-image: url('image/userheadExample.png'); border-radius: 50%;"></a>
 
 					<div class="card-content">
 						<a href="#" class="user-login">${user.user_nicename}@${user.user_login}</a>
-						<a href="#" class="publish-time">${talk.talk_date}</a>
+						<a href="#" class="publish-time">${ltb.date}</a>
 						<div class="card-detail">
 							<div class="text-box">
 								<a href="#">tag1</a> <a href="#">tag2</a> <a href="#">tag3</a> <br>
-								<p>${talk.talk_content }</p>
+								<h4><a href="#">${ltb.title }</a></h4>
+								<p class="card-post-content">${ltb.content}</p>
+								<p>${ltb.talkDetail }</p>
 							</div>
 							<div class="img-box">
-								<ul>
-									<li><div class="img-detail"
-											style="background-image: url('')">aa</div></li>
-								</ul>
+								<div class="img-detail"
+											style="background-image: url('image/contentExampleImg.jpg')"></div>
 							</div>
 
 						</div>
@@ -75,7 +75,9 @@
 						<button class="card-action-more">more</button>
 					</div>
 				</div>
+				<HR align=center width=300 color=#47effe SIZE=1>
 				</c:forEach>
+			<br>
 		</div>
 
 	</div>

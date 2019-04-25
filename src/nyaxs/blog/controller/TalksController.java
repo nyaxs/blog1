@@ -29,7 +29,7 @@ public class TalksController {
 	}
 	
 	public ModelAndView initHomePage() {
-		ModelAndView mav = new ModelAndView("home");
+		ModelAndView mav = new ModelAndView("talks");
 		return mav;
 	}
 	@RequestMapping("listTalksByUser")

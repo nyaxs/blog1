@@ -23,7 +23,7 @@
         -->  
       </property> 
       <property name="url"> 
-          <value>jdbc:mysql://localhost:3306/blog?characterEncoding=utf8&amp;serverTimezone=UTC</value> 
+          <value>jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Shanghai&amp;useFastDateParsing=false&amp;characterEncoding=utf8</value> 
      
       </property> 
       <property name="username"> 

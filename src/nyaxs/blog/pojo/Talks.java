@@ -9,6 +9,27 @@ public class Talks {
 	private Date talk_date;
 	private String talk_content;
 	private int talk_comment_count;
+	private int talk_upvote_count;
+	private int talk_share_count;
+	private int talk_collect_count;
+	public int getTalk_upvote_count() {
+		return talk_upvote_count;
+	}
+	public void setTalk_upvote_count(int talk_upvote_count) {
+		this.talk_upvote_count = talk_upvote_count;
+	}
+	public int getTalk_share_count() {
+		return talk_share_count;
+	}
+	public void setTalk_share_count(int talk_share_count) {
+		this.talk_share_count = talk_share_count;
+	}
+	public int getTalk_collect_count() {
+		return talk_collect_count;
+	}
+	public void setTalk_collect_count(int talk_collect_count) {
+		this.talk_collect_count = talk_collect_count;
+	}
 	public int getId() {
 		return id;
 	}

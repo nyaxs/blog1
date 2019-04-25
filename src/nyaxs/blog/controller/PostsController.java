@@ -26,6 +26,14 @@ public class PostsController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "blog", method = RequestMethod.GET)
+	public ModelAndView blog(int userId) {
+		ModelAndView mav = new ModelAndView("blog");
+		mav.addObject("listPostAll", postService.listPostsAll());
+		mav.addObject("listPostByUser", postService.listPostsByUserId(userId));
+		return mav;
+	}
+	
 	public ModelAndView initHomePage() {
 		ModelAndView mav = new ModelAndView("home");
 
