@@ -16,7 +16,7 @@ import nyaxs.blog.service.TalksService;
 import nyaxs.blog.service.UsersService;
 import nyaxs.blog.util.DateFormat;
 
-//@SessionAttributes(value= {"userId"},types= {Users.class})
+@SessionAttributes(value= "user")
 @Controller
 @RequestMapping("")
 public class UsersController {
@@ -37,7 +37,7 @@ public class UsersController {
 	}
 	
 	@RequestMapping("userLogin")
-	public String userLogin(Users user,Model model) throws Exception {
+	public ModelAndView userLogin(Users user) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		Users user1 = userService.userLogin(user.getUser_login(), user.getUser_pass());
 		
@@ -49,12 +49,14 @@ public class UsersController {
 			logger.info("验证成功");
 			logger.info("添加传递对象，跳转home页");
 			logger.info(user1.getId());
-			model.addAttribute("userId",user1.getId());
-			mav.addObject("userId",user1.getId());
-			return "redirect:home";
+			mav.addObject("user",user1);
+			mav.setViewName("redirect:home");
+			return mav;
 		}
-		mav.setViewName("error");
-		return "error";
+		else {
+			mav.setViewName("forward:userRegister");
+			return mav;
+		}
 	}
 
 	@RequestMapping("userRegister")
@@ -62,8 +64,10 @@ public class UsersController {
 		ModelAndView mav = new ModelAndView();
 		user.setUser_registered(DateFormat.getCurrentTime());
 		if (userService.userRegister(user) == 1) {
+			logger.info("注册成功");
+			logger.info("");
 			mav.addObject("user", user);
-			mav.setViewName("home");
+			mav.setViewName("forward:userLogin");
 			return mav;
 		}
 		mav.setViewName("error");

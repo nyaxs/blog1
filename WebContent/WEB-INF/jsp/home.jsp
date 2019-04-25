@@ -21,7 +21,7 @@
 	<div class="header">
 		<a href="home" class="logo">Nya☆喵克斯制药</a>
 		<div class="header-list">
-			<a href="home">Home</a> <a href="home">Talk</a> <a href="blog?userId=${user.id}">Blog</a> <a
+			<a href="home">Home</a> <a href="home?userId=${user.id}">Talk</a> <a href="blog?userId=${user.id}">Blog</a> <a
 				href="#">Luck</a>
 		</div>
 		<a href="login" class="user-login-info">${user.user_nicename}</a>
@@ -29,12 +29,15 @@
 
 	<div class="content">
 		<div class="editor">
-
-			<textarea placeholder="Talk some ξ( ✿＞◡❛)">
-				</textarea>
+			<form id="talkPublishForm" action="talkPublish" >
+				<input type="hidden" name="talk_author" value="${user.id}">
+			</form>
+			<textarea placeholder="Talk some ξ( ✿＞◡❛)" name="talk_content" form="talkPublishForm"></textarea>
 			<div class="editor-toolbar">
-				<a href="#">图片</a> <a href="#">标签</a> <a href="#">emoij</a> <a
-					href="#" class="editor-publish">Nya</a>
+				<a href="#">图片</a> 
+				<a href="#">标签</a> 
+				<a href="#">emoij</a> 
+				<a href="javascript:document:talkPublishForm.submit();" class="editor-publish">Nya</a>
 			</div>
 
 		</div>
@@ -52,7 +55,7 @@
 						style="background-image: url('image/userheadExample.png'); border-radius: 50%;"></a>
 
 					<div class="card-content">
-						<a href="#" class="user-login">${user.user_nicename}@${user.user_login}</a>
+						<a href="#" class="user-login">${ltb.niceName}@${ltb.userLogin}</a>
 						<a href="#" class="publish-time">${ltb.date}</a>
 						<div class="card-detail">
 							<div class="text-box">

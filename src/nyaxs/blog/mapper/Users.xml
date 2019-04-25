@@ -5,7 +5,7 @@
  
     <mapper namespace="nyaxs.blog.mapper.UsersMapper">
         <insert id="userRegister" parameterType="Users" >
-            insert into users (user_login,user_pass, user_nicename,user_email,user_registered) values (#{user_login},#{user_pass},#{user_nicename},#{user_email},#{user_registered})   
+            insert into users (user_login,user_pass, user_registered) values (#{user_login},#{user_pass},#{user_registered})   
         </insert>
          
         <delete id="userDelete" parameterType="Users" >

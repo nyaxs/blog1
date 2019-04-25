@@ -2,6 +2,7 @@ package nyaxs.blog.controller;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,7 +26,7 @@ import nyaxs.blog.service.UsersRelationService;
 import nyaxs.blog.service.UsersService;
 import nyaxs.blog.util.DateFormat;
 
-//@SessionAttributes(value= {"userId"},types= {Users.class})
+@SessionAttributes(value= "user")
 @Controller
 @RequestMapping("")
 public class HomeController {
@@ -42,10 +42,10 @@ public class HomeController {
 	static Logger logger  = Logger.getLogger(HomeController.class);
 	
 	@RequestMapping(value = "home")
-	public ModelAndView home(@ModelAttribute("userId") String userId) throws Exception {
-		logger.info("接受login的传值："+ userId);
-		int id = Integer.parseInt(userId);
-		Users user = userService.userGetById(id);
+	public ModelAndView home(@ModelAttribute("user") Users user) throws Exception {
+		logger.info("接受login的传值："+ user);
+		//int id = Integer.parseInt(userId);
+		//Users user = userService.userGetById(id);
 		ModelAndView mav = new ModelAndView("home");
 		List<TimeLineBean> listTlbSelf = new ArrayList<TimeLineBean>();
 		List<TimeLineBean> listTlbFollowed = new ArrayList<TimeLineBean>();
@@ -54,12 +54,18 @@ public class HomeController {
 		List<UsersRelation> listUr = userRelationService.getFollowedList(user.getId());
 		
 		logger.info("开始整理，装填数据");
-		listTlbSelf = addTlbFromUser(listTlbSelf, listPSelf, listTSelf);
+		listTlbSelf = addTlbFromUser(user,listTlbSelf, listPSelf, listTSelf);
 		listTlbFollowed = getFollowedTlb(listUr);
 		listTlbSelf = Stream.concat(listTlbSelf.stream(), listTlbFollowed.stream()).collect(Collectors.toList());
 		logger.info("数据装填完成");
+		logger.info("getDate()作为识别码去重");
 		logger.info("按发布时间从后向前整理列表");
-		listTlbSelf = listTlbSelf.stream().sorted(Comparator.comparing(TimeLineBean::getDate)).collect(Collectors.toList());
+		 List<Date> dates = new ArrayList<>();
+		listTlbSelf = listTlbSelf.stream().filter(d->{
+			boolean flag = !dates.contains(d.getDate());
+			dates.add(d.getDate());
+			return flag;
+		}).sorted(Comparator.comparing(TimeLineBean::getDate).reversed()).collect(Collectors.toList());
 		
 		logger.info("向模型视图装填首页用户数据");
 		mav.addObject("listTimeLine", listTlbSelf);
@@ -74,14 +80,15 @@ public class HomeController {
 		logger.info("开始装填用户关注的用户的动态");
 		List<TimeLineBean> listTlbFollowed = new ArrayList<TimeLineBean>();
 		for(UsersRelation ur:listUr){
+			Users userFollowed = userService.userGetById(ur.getFollowed_id());
 			List<Posts> listPFollowed = postService.listPostsByUserId(ur.getFollowed_id());
 			List<Talks> listTFollowed = talkService.listTalksByUserId(ur.getFollowed_id());
-			listTlbFollowed = Stream.concat(listTlbFollowed.stream(), addTlbFromUser(listTlbFollowed, listPFollowed, listTFollowed).stream()).collect(Collectors.toList());
+			listTlbFollowed = Stream.concat(listTlbFollowed.stream(), addTlbFromUser(userFollowed,listTlbFollowed, listPFollowed, listTFollowed).stream()).collect(Collectors.toList());
 		};
 		return listTlbFollowed;
 	}
 	//装填用户的动态
-	public List<TimeLineBean> addTlbFromUser(List<TimeLineBean> listTlb,List<Posts> listP,List<Talks> listT){
+	public List<TimeLineBean> addTlbFromUser(Users user,List<TimeLineBean> listTlb,List<Posts> listP,List<Talks> listT){
 		logger.info("开始装填用户的动态数据");
 		listP.stream().forEach((item)->{
 			TimeLineBean tlb = new TimeLineBean();
@@ -93,6 +100,9 @@ public class HomeController {
 			tlb.setShare_count(item.getShare_count());
 			tlb.setComment_count(item.getComment_count());
 			tlb.setUpvote_count(item.getUpvote_count());
+			tlb.setUserLogin(user.getUser_login());
+			tlb.setNiceName(user.getUser_nicename());
+			tlb.setAuthor(user.getId());
 			tlb.setType("posts");
 			listTlb.add(tlb);
 		});
@@ -105,6 +115,9 @@ public class HomeController {
 			tlb.setShare_count(item.getTalk_share_count());
 			tlb.setComment_count(item.getTalk_comment_count());
 			tlb.setUpvote_count(item.getTalk_upvote_count());
+			tlb.setUserLogin(user.getUser_login());
+			tlb.setNiceName(user.getUser_nicename());
+			tlb.setAuthor(user.getId());
 			tlb.setType("talks");
 			listTlb.add(tlb);
 		});
@@ -112,14 +125,15 @@ public class HomeController {
 		
 		return listTlb;
 	}
-	/*
-	public ModelAndView initHomePage() {
-		ModelAndView mav = new ModelAndView("home");
+
+	
+	@RequestMapping(value = "homeTest")
+	public ModelAndView homeTest(@ModelAttribute("user") Users user) throws Exception {
+		logger.info("测试session传值，来自talkPublish");
+		logger.info("从session-user中获得的userId-"+user.getId());
+		ModelAndView mav = new ModelAndView("test1");
 		return mav;
 	}
-	*/
-	
-
 	
 
 }

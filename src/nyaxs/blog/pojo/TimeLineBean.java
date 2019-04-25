@@ -5,6 +5,8 @@ import java.util.List;
 
 public class TimeLineBean {
 	private int author;
+	private String userLogin;
+	private String niceName;
 	private Date date;
 	private String content;
 	private String talkDetail;
@@ -103,4 +105,17 @@ public class TimeLineBean {
 	public void setTalkDetail(String talkDetail) {
 		this.talkDetail = talkDetail;
 	}
+	public String getNiceName() {
+		return niceName;
+	}
+	public void setNiceName(String niceName) {
+		this.niceName = niceName;
+	}
+	public String getUserLogin() {
+		return userLogin;
+	}
+	public void setUserLogin(String userLogin) {
+		this.userLogin = userLogin;
+	}
+
 }
