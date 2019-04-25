@@ -65,7 +65,7 @@ public class UsersController {
 		user.setUser_registered(DateFormat.getCurrentTime());
 		if (userService.userRegister(user) == 1) {
 			logger.info("注册成功");
-			logger.info("");
+			logger.info("转发给userLogin");
 			mav.addObject("user", user);
 			mav.setViewName("forward:userLogin");
 			return mav;
