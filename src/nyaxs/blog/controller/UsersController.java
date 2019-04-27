@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -73,5 +74,14 @@ public class UsersController {
 		mav.setViewName("error");
 		return mav;
 	}
-
+	
+	@RequestMapping("userInfo")
+	public ModelAndView userInfo(@ModelAttribute("user") Users user) throws Exception {
+		ModelAndView mav = new ModelAndView();
+			logger.info("前往userInfo页");
+			logger.info("测试user-nicename值-"+user.getUser_nicename());
+			mav.addObject("user", user);
+			mav.setViewName("userInfo");
+			return mav;
+	}
 }

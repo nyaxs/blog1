@@ -21,10 +21,10 @@
 	<div class="header">
 		<a href="home" class="logo">Nya☆喵克斯制药</a>
 		<div class="header-list">
-			<a href="home">Home</a> <a href="home?userId=${user.id}">Talk</a> <a href="blog?userId=${user.id}">Blog</a> <a
+			<a href="home">Home</a> <a href="home">Talk</a> <a href="blog">Blog</a> <a
 				href="#">Luck</a>
 		</div>
-		<a href="login" class="user-login-info">${user.user_nicename}</a>
+		<a href="userInfo" class="user-login-info">${user.user_nicename}</a>
 	</div>
 
 	<div class="content">

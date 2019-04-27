@@ -165,3 +165,10 @@ li{
 .card-action-more{
   grid-area:1/12/2/13;
 }
+textarea::-webkit-input-placeholder {
+       color: #aab2bd;
+       font-size: 20px;
+    }
+    textarea{
+    	font-size:20px;
+    }
