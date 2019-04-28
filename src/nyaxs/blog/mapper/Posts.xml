@@ -8,12 +8,16 @@
             insert into posts ( post_author,post_content,post_title,post_date,post_type) values (#{post_author},#{post_content},#{post_title},#{post_date},#{post_type})   
         </insert>
          
-        <delete id="deletePost" parameterType="Posts" >
+        <delete id="deletePost" parameterType="_int" >
             delete from posts where id = #{id}  
         </delete>
          
         <select id="getPostByTitle" parameterType="java.lang.String" resultType="Posts">
             select * from   posts  where post_title like #{post_title}   
+        </select>
+        
+         <select id="getPostById" parameterType="_int" resultType="Posts">
+            select * from   posts  where id = #{id}   
         </select>
  
         <update id="updatePostTitle" parameterType="Posts" >

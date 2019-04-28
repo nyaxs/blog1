@@ -103,6 +103,7 @@ public class HomeController {
 			tlb.setUserLogin(user.getUser_login());
 			tlb.setNiceName(user.getUser_nicename());
 			tlb.setAuthor(user.getId());
+			tlb.setPostId(item.getId());
 			tlb.setType("posts");
 			listTlb.add(tlb);
 		});
@@ -118,6 +119,7 @@ public class HomeController {
 			tlb.setUserLogin(user.getUser_login());
 			tlb.setNiceName(user.getUser_nicename());
 			tlb.setAuthor(user.getId());
+			tlb.setTalkId(item.getId());
 			tlb.setType("talks");
 			listTlb.add(tlb);
 		});

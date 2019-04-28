@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 public class TimeLineBean {
+	private int postId;
+	private int talkId;
 	private int author;
 	private String userLogin;
 	private String niceName;
@@ -116,6 +118,18 @@ public class TimeLineBean {
 	}
 	public void setUserLogin(String userLogin) {
 		this.userLogin = userLogin;
+	}
+	public int getPostId() {
+		return postId;
+	}
+	public void setPostId(int postId) {
+		this.postId = postId;
+	}
+	public int getTalkId() {
+		return talkId;
+	}
+	public void setTalkId(int talkId) {
+		this.talkId = talkId;
 	}
 
 }

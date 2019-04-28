@@ -11,5 +11,5 @@ public interface PostsMapper {
 	void updatePostTitle(Posts post);
 	List<Posts> listPostsByUserId(int userId);
 	List<Posts> listPostsAll();
-	
+	Posts getPostById(int id)throws Exception;
 }

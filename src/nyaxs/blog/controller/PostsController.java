@@ -15,7 +15,7 @@ import nyaxs.blog.service.PostsService;
 import nyaxs.blog.service.UsersService;
 import nyaxs.blog.util.DateFormat;
 
-@SessionAttributes(value= "user")
+@SessionAttributes(value= {"user","post"})
 @Controller
 @RequestMapping("")
 public class PostsController {
@@ -64,6 +64,24 @@ public class PostsController {
 	}
 	
 
+	@RequestMapping(value = "blogDetail")
+	public ModelAndView blogDetail(@ModelAttribute("user") Users user, int postId) throws Exception {
+		logger.info("测试跳转blogDetail页传值user.getId-"+user.getId());
+		logger.info("测试跳转blogDetail页传值postId-"+postId);
+		ModelAndView mav = new ModelAndView("blogDetail");
+		mav.addObject("user",user);
+		mav.addObject("post", postService.getPostById(postId));
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("listPostsByUser")
 	public ModelAndView listPostsByUser(Users user) {
 		ModelAndView mav = new ModelAndView("home");

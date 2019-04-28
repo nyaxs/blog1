@@ -177,14 +177,12 @@ hr{
 </head>
 <body class="all-in-container">
 	<div class="header">
-      <a href="home" class="logo">Nya☆喵克斯制药</a>
-	    <div class="header-list">
-			<a href="home"><i class="fa fa-home"></i>&nbsp;Home</a>
-			<a href="home">Talk</a>
-			<a href="blog">Blog</a>
-			<a href="#">Luck</a>
-      </div>
-      <a href="#" class="user-login-info">${user.user_nicename}</a>
+		<a href="home" class="logo">Nya☆喵克斯制药</a>
+		<div class="header-list">
+			<a href="home">Home</a> <a href="home">Talk</a> <a href="blog">Blog</a> <a
+				href="#">Luck</a>
+		</div>
+		<a href="userInfo" class="user-login-info">${user.user_nicename}</a>
 	</div>
 
 	<div class="content">
@@ -192,7 +190,7 @@ hr{
         <ul class="">
 			<c:forEach items="${listPostByUser}" var="c" varStatus="st">
 			
-					<li><a href="#"><i class="fa fa-moon-o"></i>&nbsp;${c.post_title}-${c.post_date}</a><hr/></li>
+					<li><a href="blogDetail?postId=${c.id}"><i class="fa fa-moon-o"></i>&nbsp;${c.post_title}-${c.post_date}</a><hr/></li>
 			</c:forEach>
         </ul>
       </div>

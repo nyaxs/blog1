@@ -53,4 +53,9 @@ public class PostsServiceImpl implements PostsService {
 	public List<Posts> listPostsAll() {
 		return postMapper.listPostsAll();
 	}
+
+	@Override
+	public Posts getPostById(int id) throws Exception {
+		return postMapper.getPostById(id);
+	}
 }
