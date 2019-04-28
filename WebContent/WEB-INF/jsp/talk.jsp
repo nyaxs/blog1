@@ -14,21 +14,45 @@
 <head>
 <meta charset="utf-8">
 <title>HomeTest</title>
-<link href="css/home.css" rel="stylesheet" type="text/css" />
+<link href="css/talk.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" >
+window.onload=function(){
+	//原始字符串
+	var string = document.getElementById("talkContent");
+	var p = string.innerHTML.toString();
+	//去掉所有的换行符
+	p = p.replace(/\r\n/g,"<br>");
+	p = p.replace(/\n/g,"<br>");
+	//去掉所有的空格（中文空格、英文空格都会被替换）
+	p = p.replace(/\s/g,"&nbsp;");
+	//输出转换后的字符串
+	string.innerHTML = p.toString();
+}
+</script>
 </head>
 
 <body class="all-in-container">
 	<div class="header">
 		<a href="home" class="logo">Nya☆喵克斯制药</a>
 		<div class="header-list">
-			<a href="home">Home</a> <a href="home">Talk</a> <a href="blog">Blog</a> <a
+			<a href="home">Home</a> <a href="talk">Talk</a> <a href="blog">Blog</a> <a
 				href="#">Luck</a>
 		</div>
 		<a href="userInfo" class="user-login-info">${user.user_nicename}</a>
 	</div>
 
 	<div class="content">
-		<div class="editor">
+		      <div class="user-info">
+          <div class="user-attr">
+            <div class="user-avatar"></div>
+            <a class="author-name">${user.user_nicename}@${user.user_login}</a>
+            <p class="author-attr">
+              <span>{followers233}</span><span>{readcount233}</span>
+            </p>
+         </div>
+     </div>
+      <div class="editor">
 			<form id="talkPublishForm" action="talkPublish" >
 				<input type="hidden" name="talk_author" value="${user.id}">
 			</form>
@@ -39,30 +63,24 @@
 				<a href="#">emoij</a> 
 				<a href="javascript:document:talkPublishForm.submit();" class="editor-publish">Nya</a>
 			</div>
-
-		</div>
-
-		<div class="tab-bar">
-			<a href="#">时间线上</a> <a href="#">火炎焱燚</a> <a href="#">特别关注</a> <a
-				href="#">收藏喜欢</a>
+          <HR align=center width=300 color=#47effe SIZE=1>
 		</div>
 
 		<div class="card-flow">
 			<br>
-			<c:forEach items="${listTimeLine}" var="ltb" varStatus="st">
+			<c:forEach items="${talkTimeLine}" var="talk" varStatus="st">
 				<div class="card">
 					<a href="" target="_blank" class="user-head"
 						style="background-image: url('image/userheadExample.png'); border-radius: 50%;"></a>
 
 					<div class="card-content">
-						<a href="#" class="user-login">${ltb.niceName}@${ltb.userLogin}</a>
-						<a href="#" class="publish-time">${ltb.date}</a>
+						<a href="#" class="user-login">${user.user_nicename}@${user.user_login}</a>
+						<a href="#" class="publish-time">${talk.talk_date}</a>
 						<div class="card-detail">
 							<div class="text-box">
 								<a href="#">tag1</a> <a href="#">tag2</a> <a href="#">tag3</a> <br>
-								<h4><a href="blogDetail?postId=${ltb.postId}">${ltb.title }</a></h4>
-								<p class="card-post-content">${ltb.content}</p>
-								<p>${ltb.talkDetail }</p>
+								
+								<p id="talkContent">${talk.talk_content }</p>
 							</div>
 							<div class="img-box">
 								<div class="img-detail"

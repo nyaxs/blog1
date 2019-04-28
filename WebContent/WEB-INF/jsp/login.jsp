@@ -58,6 +58,13 @@
 	}
 
 </style>
+
+<script type="text/javascript">
+	window.onload=function(){
+		alert("输入用户名、密码即可直接注册并登录");
+	}
+</script>
+
 </head>
 <body>
 

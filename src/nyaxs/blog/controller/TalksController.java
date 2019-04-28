@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -46,7 +47,13 @@ public class TalksController {
 		mav.addObject("listTalksByUser", talkService.listTalksByUserId(user.getId()));
 		return mav;
 	}
-
+	@RequestMapping("talk")
+	public ModelAndView talk(@ModelAttribute("user") Users user) throws Exception {
+		ModelAndView mav = new ModelAndView("talk");
+		mav.addObject("user",user);
+		mav.addObject("talkTimeLine", talkService.listTalksByUserId(user.getId()));
+		return mav;
+	}
 	@RequestMapping("talkPublish")
 	public ModelAndView talkIssue(Talks talk) throws Exception {
 		logger.info("进入talkPublish");

@@ -14,7 +14,22 @@
 <head>
 <meta charset="utf-8">
 <title>UserInfo</title>
+<script type="text/javascript" >
+window.onload=function(){
+	//原始字符串
+	var string = document.getElementById("detail-content");
+	var p = string.innerHTML.toString();
+	//去掉所有的换行符
+	p = p.replace(/\r\n/g,"<br>&nbsp;&nbsp;&nbsp;&nbsp;");
+	p = p.replace(/\n/g,"<br>&nbsp;&nbsp;&nbsp;&nbsp;");
+	//去掉所有的空格（中文空格、英文空格都会被替换）
+	p = p.replace(/\s/g,"&nbsp;");
+	//输出转换后的字符串
+	string.innerHTML = p.toString();
+}
+</script>
 <style>
+
 body{
   background-color:#f5f7f9;
 }
@@ -108,7 +123,7 @@ li{
 .author-name{
   grid-area:1/3/2/13;
   justify-self:start;
-  font-size:18px;
+  font-size:16px;
 }
 .author-attr{
    grid-area:2/3/3/13;
@@ -141,7 +156,7 @@ li{
   grid-area:3/4/4/10;
   display:grid;
   grid-template-columns:repeat(12,1fr);
-  
+  background-color:#f1bbba;
 }
 .action{
   grid-area:1/1/2/13;
@@ -169,7 +184,7 @@ li{
 	<div class="header">
 		<a href="home" class="logo">Nya☆喵克斯制药</a>
 		<div class="header-list">
-			<a href="home">Home</a> <a href="home">Talk</a> <a href="blog">Blog</a> <a
+			<a href="home">Home</a> <a href="talk">Talk</a> <a href="blog">Blog</a> <a
 				href="#">Luck</a>
 		</div>
 		<a href="userInfo" class="user-login-info">${user.user_nicename}</a>
@@ -189,14 +204,14 @@ li{
             <div class="user-avatar"></div>
             <a class="author-name">${user.user_nicename}@${user.user_login}</a>
             <p class="author-attr">
-              <span>${followers233}</span><span>${readcount233}</span>
+              <span>{followers233}</span><span>{readcount233}</span>
             </p>
          </div>
           <a href="blog" class="blog-write">Write</a>
         </div>
       
         <div class="detail">
-          <p class="detail-content">${post.post_content}
+          <p class="detail-content" id="detail-content">${post.post_content}
           </p>
       </div>
       </div>
