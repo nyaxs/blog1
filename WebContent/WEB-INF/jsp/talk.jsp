@@ -74,7 +74,7 @@ window.onload=function(){
 						style="background-image: url('image/userheadExample.png'); border-radius: 50%;"></a>
 
 					<div class="card-content">
-						<a href="#" class="user-login">${user.user_nicename}@${user.user_login}</a>
+						<a href="userInfo" class="user-login">${user.user_nicename}@${user.user_login}</a>
 						<a href="#" class="publish-time">${talk.talk_date}</a>
 						<div class="card-detail">
 							<div class="text-box">

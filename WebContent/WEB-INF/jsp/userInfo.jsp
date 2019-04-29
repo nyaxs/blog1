@@ -248,23 +248,26 @@ hr{
       
       </div>
       <div class="user-following">
+      <c:forEach items="${followingList}" var="following" varStatus="st">
         <div class="profile-card">
           <div class="profile-card-avatar"></div>
-          <a class="relation">relation</a>
-          <a class="profile-card-user-nicename">${user.user_nicename}</a>
-          <a class="profile-card-user-login"><span>@${user.user_login}</span></a>
+          <a class="relation">following</a>
+          <a class="profile-card-user-nicename">${following.user_nicename}</a>
+          <a class="profile-card-user-login"><span>@${following.user_login}</span></a>
           <p class="sign">Never give up the pursuit of learning </p>
         </div>
-        
+        </c:forEach>
      </div>
      <div class="user-follower">
+     <c:forEach items="${followersList}" var="follower" varStatus="st">
         <div class="profile-card">
           <div class="profile-card-avatar"></div>
-          <a class="relation">relation</a>
-          <a class="profile-card-user-nicename">${user.user_nicename}</a>
-          <a class="profile-card-user-login"><span>@${user.user_login}</span></a>
+          <a class="relation">follower</a>
+          <a class="profile-card-user-nicename">${follower.user_nicename}</a>
+          <a class="profile-card-user-login"><span>@${follower.user_login}</span></a>
           <p class="sign">Never give up the pursuit of learning </p>
         </div>
+       </c:forEach>
      </div>
     </div>
 </body>

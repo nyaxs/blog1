@@ -1,5 +1,8 @@
 package nyaxs.blog.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import nyaxs.blog.pojo.Users;
 import nyaxs.blog.service.PostsService;
 import nyaxs.blog.service.TalksService;
+import nyaxs.blog.service.UsersRelationService;
 import nyaxs.blog.service.UsersService;
 import nyaxs.blog.util.DateFormat;
 
@@ -27,7 +31,10 @@ public class UsersController {
 	PostsService postService;
 	@Autowired
 	TalksService talkService;
-
+	@Autowired
+	UsersRelationService userRelationService;
+	
+	
 	static Logger logger  = Logger.getLogger(UsersController.class);
 	
 	@RequestMapping("login")
@@ -80,6 +87,32 @@ public class UsersController {
 		ModelAndView mav = new ModelAndView();
 			logger.info("前往userInfo页");
 			logger.info("测试user-nicename值-"+user.getUser_nicename());
+			List<Users> followingList = new ArrayList<Users>();
+			List<Users> followersList = new ArrayList<Users>();
+			userRelationService.getFollowedList(user.getId()).stream().forEach(item->{
+				try {
+					Users following = userService.userGetById(item.getFollowed_id());
+					logger.info("测试following userName值-"+following.getUser_nicename());
+					followingList.add(following);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+			userRelationService.getFollwers(user.getId()).stream().forEach(item->{
+				Users follower;
+				try {
+					follower = userService.userGetById(item.getId());
+					logger.info("测试follower userName值-"+follower.getUser_nicename());
+					followersList.add(follower);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			});
+			mav.addObject("followingList", followingList);
+			mav.addObject("followersList", followersList);
 			mav.addObject("user", user);
 			mav.setViewName("userInfo");
 			return mav;

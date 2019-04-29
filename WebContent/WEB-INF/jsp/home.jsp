@@ -158,6 +158,7 @@ textarea::-webkit-input-placeholder {
     	font-size:20px;
     }
 </style>
+
 </head>
 
 <body class="all-in-container">
@@ -185,10 +186,10 @@ textarea::-webkit-input-placeholder {
 						style="background-image: url('image/userheadExample.png'); border-radius: 50%;"></a>
 
 					<div class="card-content">
-						<a href="#" class="user-login">${ltb.niceName}@${ltb.userLogin}</a>
+						<a href="userInfo" class="user-login">${ltb.niceName}@${ltb.userLogin}</a>
 						<a href="#" class="publish-time">${ltb.date}</a>
 						<div class="card-detail">
-							<div class="text-box">
+							<div class="text-box" id="text-box">
 								<a href="#">tag1</a> <a href="#">tag2</a> <a href="#">tag3</a> <br>
 								<h4>
 									<a href="blogDetail?postId=${ltb.postId}">${ltb.title }</a>

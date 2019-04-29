@@ -8,5 +8,29 @@
         <select id="getFollowedList" resultType="UsersRelation">
             select * from  users_relation where user_id = #{0}
         </select>  
+        
+        <select id="getBothFollowedList" resultType="UsersRelation">
+            select * from  users_relation where user_id = #{0} and relation = 2
+        </select>  
+        
+         <select id="getFollwers" resultType="UsersRelation">
+            select * from  users_relation where followed_id = #{0}
+        </select> 
+        
+       <delete id="cancelFollowing" parameterType="_int" >
+            delete from users_relation where user_id = #{0} and followed_id = #{1}
+        </delete>
+     
+     	<update id="updateBothRelationId1" parameterType="_int" >
+            update users_relation set relation=2 where id=#{0}  and  followed_id=#{1}
+        </update>
+        <update id="updateBothRelationId2" parameterType="_int" >
+            update users_relation set relation=2 where id=#{1}  and  followed_id=#{0}
+        </update>
+        
+        <delete id="deleteRelationSingle" parameterType="_int" >
+            delete from users_relation where user_id = #{0} and followed_id = #{1}
+        </delete>
+        
      
     </mapper>
